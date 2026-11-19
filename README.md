@@ -1,90 +1,85 @@
-🧠 POSSUM - Intelligent Data Processing & Automation System
-<p align="center"> <img src="a_dark_themed_computer_screen_jupyter_notebook_scr.png" alt="Project Preview" width="800"/> </p> <p align="center"> <img src="https://img.shields.io/badge/Python-Data%20Science-blue?logo=python"/> <img src="https://img.shields.io/badge/Status-Production%20Ready-success"/> <img src="https://img.shields.io/badge/AI-Ready-purple"/> <img src="https://img.shields.io/badge/Jupyter-Notebook-orange"/> <img src="https://img.shields.io/badge/Type-Analytics%20Engine-red"/> </p>
-🚀 Overview
+# 🐾 Possum Total Length Predictor
 
-POSSUM is an intelligent data processing and analytics system built using Python in a Jupyter Notebook environment.
+A machine learning project on the **possum dataset** (104 mountain brushtail possums from 7 sites in
+Australia). It explores the data, handles missing values, and trains a **linear regression** model that
+predicts a possum's **total body length** (`totlngth`, cm) from its other body measurements. An
+interactive **Streamlit** app lets you make predictions and inspect the model.
 
-The project focuses on transforming raw datasets into structured insights through data analysis, logical processing, and automated decision-style outputs.
+## 🚀 Features
 
-It is designed as a foundation for AI-powered analytics systems, making it suitable for scaling into recommendation engines or predictive models.
+- Data exploration and missing-value handling (`age` and `footlgth` have 3 missing values in total)
+- Preprocessing demo: KNN imputation, ordinal encoding and standard scaling (`encoding_imputer_Scaling.ipynb`)
+- Linear regression for total length, evaluated with R², MAE, MSE and RMSE (`linearRegression.ipynb`)
+- **Streamlit demo** with:
+  - Single prediction from 10 body measurements, with a training-range check
+  - Batch prediction from an uploaded CSV, with a downloadable result
+  - Model performance: train/test metrics, 5-fold cross-validated R², actual-vs-predicted plot, coefficients
+  - Dataset view with feature correlations
 
-💡 What This Project Does
+## 📊 Model
 
-This system takes raw input data and:
+| | |
+|---|---|
+| Target | `totlngth` – total length (cm) |
+| Features | `site`, `age`, `hdlngth`, `skullw`, `taill`, `footlgth`, `earconch`, `eye`, `chest`, `belly` |
+| Excluded | `sex`, `Pop` (as in the notebook), `case` (row ID) |
+| Preprocessing | Mean imputation of missing values |
+| Algorithm | scikit-learn `LinearRegression` |
+| Split | 80/20, `random_state=42` |
 
-Processes and cleans the dataset
-Applies structured analytical logic
-Extracts hidden patterns
-Generates meaningful outputs and insights
-Prepares data for AI/ML extension
-⚙️ Core Features
-📊 Data preprocessing & transformation
-🧹 Cleaning and handling missing values
-📈 Exploratory Data Analysis (EDA)
-🧠 Rule-based intelligence layer
-🔍 Pattern detection in structured datasets
-⚡ Ready for Machine Learning upgrade
-🛠 Tech Stack
-Python
-Jupyter Notebook
-Pandas
-NumPy
-Matplotlib
-Seaborn
-📊 System Workflow
-Raw Data → Cleaning → Feature Processing → Analysis Engine → Insight Generation → AI-Ready Output
-💼 Real-World Applications
+Current results: train R² ≈ 0.80, test R² ≈ 0.41, test MAE ≈ 1.8 cm, shuffled 5-fold CV R² ≈ 0.68 ± 0.14.
+The test set has only 21 rows, so the cross-validated score is the more reliable estimate.
 
-This project can be used as a base for:
+## 🛠 Tech Stack
 
-📊 Data analytics platforms
-🤖 AI recommendation systems
-📈 Business intelligence dashboards
-🧠 Predictive modeling systems
-⚙️ Automation & decision support tools
-🔮 AI Evolution Roadmap
+Python · pandas · NumPy · scikit-learn · Altair · Streamlit · Jupyter
 
-POSSUM is designed to evolve into a full AI product:
+## 📂 Project Structure
 
-🤖 Machine Learning prediction layer
-📡 API-based data intelligence service
-📊 Real-time analytics dashboard
-🧠 Smart recommendation engine
-🌐 SaaS AI analytics platform
-🚀 Getting Started
+```
+possum/
+├── possum.csv                       # Dataset
+├── linearRegression.ipynb           # EDA + linear regression notebook
+├── encoding_imputer_Scaling.ipynb   # Imputation / encoding / scaling notebook
+├── possum_model.py                  # Reusable training, evaluation and prediction code
+├── app.py                           # Streamlit demo
+├── requirements.txt
+└── .streamlit/config.toml
+```
+
+## 📦 Installation
+
+```bash
 git clone https://github.com/amirafarhan/possum.git
 cd possum
-jupyter notebook
+python -m venv venv
+# Windows: venv\Scripts\activate    Linux/Mac: source venv/bin/activate
+pip install -r requirements.txt
+```
 
-Then open:
+## ▶️ Run
 
-possum.ipynb
-👨‍💻 Role & Contribution
-Designed and implemented the full data pipeline
-Built analytical and logical processing flow
-Structured insights generation system
-Prepared architecture for future AI integration
-⭐ Why This Project Matters
+Streamlit demo (opens http://localhost:8501):
 
-This project represents:
+```bash
+streamlit run app.py
+```
 
-Strong data science foundation
-Analytical thinking applied to real data
-First step toward AI-powered systems
-Scalable architecture for production AI products
-💣 Portfolio Value (Important)
+Train and print metrics from the command line:
 
-This is not just a notebook —
-it is a prototype of an AI analytics engine that can be extended into:
+```bash
+python possum_model.py
+```
 
-SaaS product 💰
-AI API service 🌐
-Business intelligence tool 📊
-👨‍💻 Author
+Notebooks: `pip install jupyter`, run `jupyter notebook`, then open `linearRegression.ipynb` or
+`encoding_imputer_Scaling.ipynb`.
 
-Amira Mohamed
-Machine Learning Engineer
+## 🔮 Possible Next Steps
 
-🔥 Final Note
+- Compare with regularised models (Ridge/Lasso) using cross-validation
+- Treat `site` as a categorical feature (one-hot encoding)
+- Add `sex` and `Pop` as encoded features
 
-POSSUM is a foundational step toward building real-world AI systems that transform raw data into intelligent decisions.
+## 👨‍💻 Author
+
+Amira Mohamed – Machine Learning Engineer
