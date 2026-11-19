@@ -5,6 +5,8 @@ Australia). It explores the data, handles missing values, and trains a **linear 
 predicts a possum's **total body length** (`totlngth`, cm) from its other body measurements. An
 interactive **Streamlit** app lets you make predictions and inspect the model.
 
+**🔗 Live demo:** https://possum-length.streamlit.app/
+
 ## 🚀 Features
 
 - Data exploration and missing-value handling (`age` and `footlgth` have 3 missing values in total)
@@ -59,7 +61,9 @@ pip install -r requirements.txt
 
 ## ▶️ Run
 
-Streamlit demo (opens http://localhost:8501):
+Live demo: https://possum-length.streamlit.app/
+
+Run the Streamlit demo locally (opens http://localhost:8501):
 
 ```bash
 streamlit run app.py
